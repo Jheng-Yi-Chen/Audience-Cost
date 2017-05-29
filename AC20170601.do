@@ -88,7 +88,6 @@ summarize lndistance
 *rgdpnapop = control variable*
 summarize gdp1
 summarize gdp2
-
 *gen gdp = min(gdp1, gdp2)
 *gen lngdp = ln(gdp)
 summarize lngdp
@@ -137,7 +136,7 @@ tabulate cwmid majpow
 *tab liec1 liec2
 
 *corr*
-cor iec liec eiec polity
+cor iec liec eiec polity politydyad
 pwcorr cwmid liec1 liec2 eiec1 eiec2 iec liec eiec polity21 polity22 polity
 
 ****************************************************************************************************
@@ -196,10 +195,12 @@ xtgee cwmid liec i.majpow cap ib2.alliance polity lndistance lngdp, family(binom
 xtgee cwmid liec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit)
 estimates store m5, title(model 5)
 xtgee cwmid liec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
+estimates store m7, title(model 7)
 
+esttab m7 using AC9.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
+esttab m10 m7 m2 m8 m1 m9 m6 m5 using AC10.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 
 margins, dydx(*)
-esttab m10 m7 m2 m8 m1 m9 m6 m5 using AC10.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 
 *relogit*
 help relogit
