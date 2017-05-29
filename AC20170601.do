@@ -172,10 +172,10 @@ xtgee cwmid frac eiec i.majpow cap ib2.alliance polity lndistance lngdp, family(
 xtgee cwmid frac eiec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit) nolog
 estimates store m8, title(model 8)
 
-esttab m1 m2 using AC1.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
-
 *iec*
 xtgee cwmid iec i.majpow cap ib2.alliance polity lndistance lngdp, family(binomial) link(logit) nolog
+xtgee cwmid iec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit) nolog
+estimates store m1, title(model 1)
 
 *liec and eiec*
 xtgee cwmid liec eiec i.majpow cap ib2.alliance polity lndistance lngdp, family(binomial) link(logit) nolog
@@ -187,18 +187,19 @@ xtgee cwmid eiec i.majpow cap ib2.alliance polity lndistance lngdp, family(binom
 xtgee cwmid eiec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit)
 estimates store m6, title(model 6)
 xtgee cwmid eiec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
-estimates store m8, title(model 8)
+estimates store m4, title(model 4)
 
 esttab m8 using AC5.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 
 *liec*
 xtgee cwmid liec i.majpow cap ib2.alliance polity lndistance lngdp, family(binomial) link(logit) nolog
 xtgee cwmid liec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit)
-xtgee cwmid liec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
 estimates store m5, title(model 5)
+xtgee cwmid liec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
 
-esttab m3 m4 m5 using AC2.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
+
 margins, dydx(*)
+esttab m10 m7 m2 m8 m1 m9 m6 m5 using AC10.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 
 *relogit*
 help relogit
