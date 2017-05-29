@@ -56,9 +56,19 @@ gen polity = min(polity21, polity22)
 tab polity
 summarize polity
 
-*recode polity to democracy and authoritarianism*
+*(-10/-7 = 1) (-6/6 = 2) (7/10 = 3)*
+recode polity21 (-10/-7 = 1) (-6/6 = 2) (7/10 = 3), gen (democracy1)
+recode polity22 (-10/-7 = 1) (-6/6 = 2) (7/10 = 3), gen (democracy2)
+
+*(-10/-6 = 1) (-5/5 = 2) (6/10 = 3)*
 recode polity21 (-10/-6 = 1) (-5/5 = 2) (6/10 = 3), gen (democracy1)
 recode polity22 (-10/-6 = 1) (-5/5 = 2) (6/10 = 3), gen (democracy2)
+
+*(-10/-5 = 1) (-4/4 = 2) (5/10 = 3)*
+recode polity21 (-10/-5 = 1) (-4/4 = 2) (5/10 = 3), gen (democracy1)
+recode polity22 (-10/-5 = 1) (-4/4 = 2) (5/10 = 3), gen (democracy2)
+
+*recode polity to democracy and authoritarianism*
 tab democracy1
 tab democracy2
 tab democracy1 polity21
@@ -184,20 +194,20 @@ estimates store m9, title(model 9)
 *eiec*
 xtgee cwmid eiec i.majpow cap ib2.alliance polity lndistance lngdp, family(binomial) link(logit) nolog
 xtgee cwmid eiec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit)
-estimates store m6, title(model 6)
-xtgee cwmid eiec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
 estimates store m4, title(model 4)
+xtgee cwmid eiec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
+estimates store m5, title(model 5)
 
 esttab m8 using AC5.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 
 *liec*
 xtgee cwmid liec i.majpow cap ib2.alliance polity lndistance lngdp, family(binomial) link(logit) nolog
 xtgee cwmid liec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit)
-estimates store m5, title(model 5)
+estimates store m6, title(model 6)
 xtgee cwmid liec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
 estimates store m7, title(model 7)
 
-esttab m7 using AC9.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
+esttab m4 m5 m6 m7 using AC9.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 esttab m10 m7 m2 m8 m1 m9 m6 m5 using AC10.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
 
 margins, dydx(*)
