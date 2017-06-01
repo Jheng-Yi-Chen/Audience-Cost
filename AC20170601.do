@@ -61,20 +61,20 @@ recode polity21 (-10/-7 = 1) (-6/6 = 2) (7/10 = 3), gen (democracy1)
 recode polity22 (-10/-7 = 1) (-6/6 = 2) (7/10 = 3), gen (democracy2)
 
 *(-10/-6 = 1) (-5/5 = 2) (6/10 = 3)*
-recode polity21 (-10/-6 = 1) (-5/5 = 2) (6/10 = 3), gen (democracy1)
-recode polity22 (-10/-6 = 1) (-5/5 = 2) (6/10 = 3), gen (democracy2)
+*recode polity21 (-10/-6 = 1) (-5/5 = 2) (6/10 = 3), gen (democracy1)
+*recode polity22 (-10/-6 = 1) (-5/5 = 2) (6/10 = 3), gen (democracy2)
 
 *(-10/-5 = 1) (-4/4 = 2) (5/10 = 3)*
-recode polity21 (-10/-5 = 1) (-4/4 = 2) (5/10 = 3), gen (democracy1)
-recode polity22 (-10/-5 = 1) (-4/4 = 2) (5/10 = 3), gen (democracy2)
+*recode polity21 (-10/-5 = 1) (-4/4 = 2) (5/10 = 3), gen (democracy1)
+*recode polity22 (-10/-5 = 1) (-4/4 = 2) (5/10 = 3), gen (democracy2)
 
 *(-10/-4 = 1) (-3/3 = 2) (4/10 = 3)*
-recode polity21 (-10/-4 = 1) (-3/3 = 2) (4/10 = 3), gen (democracy1)
-recode polity22 (-10/-4 = 1) (-3/3 = 2) (4/10 = 3), gen (democracy2)
+*recode polity21 (-10/-4 = 1) (-3/3 = 2) (4/10 = 3), gen (democracy1)
+*recode polity22 (-10/-4 = 1) (-3/3 = 2) (4/10 = 3), gen (democracy2)
 
 *(-10/-3 = 1) (-2/2 = 2) (3/10 = 3)*
-recode polity21 (-10/-3 = 1) (-2/2 = 2) (3/10 = 3), gen (democracy1)
-recode polity22 (-10/-3 = 1) (-2/2 = 2) (3/10 = 3), gen (democracy2)
+*recode polity21 (-10/-3 = 1) (-2/2 = 2) (3/10 = 3), gen (democracy1)
+*recode polity22 (-10/-3 = 1) (-2/2 = 2) (3/10 = 3), gen (democracy2)
 
 *recode polity to democracy and authoritarianism*
 tab democracy1
@@ -204,7 +204,9 @@ xtgee cwmid eiec i.majpow cap ib2.alliance polity lndistance lngdp, family(binom
 xtgee cwmid eiec i.majpow cap ib2.alliance ib2.politydyad lndistance lngdp, family(binomial) link(logit)
 estimates store m4, title(model 4)
 xtgee cwmid eiec i.majpow cap ib2.alliance lndistance lngdp, family(binomial) link(logit)
+xtgee cwmid eiec i.majpow cap ib2.alliance lndistance, family(binomial) link(logit)
 xtgee cwmid eiec i.majpow cap lndistance lngdp, family(binomial) link(logit)
+xtgee cwmid eiec i.majpow cap lndistance, family(binomial) link(logit)
 estimates store m5, title(model 5)
 
 esttab m8 using AC5.csv, replace se(3) b(3) star(* 0.05 ** 0.01 *** 0.001)
